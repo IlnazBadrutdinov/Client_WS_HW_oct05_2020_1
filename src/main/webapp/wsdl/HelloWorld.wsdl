@@ -1,0 +1,36 @@
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.mkyong.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://ws.mkyong.com/" name="HelloWorldService">
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://ws.mkyong.com/" schemaLocation="http://localhost:8887/ilnaz2?xsd=1"/>
+        </xsd:schema>
+    </types>
+    <message name="getHelloWorld">
+        <part name="parameters" element="tns:getHelloWorld"/>
+    </message>
+    <message name="getHelloWorldResponse">
+        <part name="parameters" element="tns:getHelloWorldResponse"/>
+    </message>
+    <portType name="HelloWorld">
+        <operation name="getHelloWorld">
+            <input wsam:Action="http://ws.mkyong.com/HelloWorld/getHelloWorldRequest" message="tns:getHelloWorld"/>
+            <output wsam:Action="http://ws.mkyong.com/HelloWorld/getHelloWorldResponse" message="tns:getHelloWorldResponse"/>
+        </operation>
+    </portType>
+    <binding name="HelloWorldPortBinding" type="tns:HelloWorld">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="getHelloWorld">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="HelloWorldService">
+        <port name="HelloWorldPort" binding="tns:HelloWorldPortBinding">
+            <soap:address location="http://localhost:8887/ilnaz2"/>
+        </port>
+    </service>
+</definitions>
